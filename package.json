@@ -4,7 +4,7 @@
   "description": "run express/connect middleware in parallel, proceeding when first completes",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node ./node_modules/mocha/bin/mocha"
   },
   "repository": {
     "type": "git",
@@ -22,5 +22,13 @@
   "bugs": {
     "url": "https://github.com/craigcav/express-race/issues"
   },
-  "homepage": "https://github.com/craigcav/express-race#readme"
+  "homepage": "https://github.com/craigcav/express-race#readme",
+  "files": [
+    "index.js"
+  ],
+  "devDependencies": {
+    "express": "^4.15.0",
+    "mocha": "^3.2.0",
+    "supertest": "^3.0.0"
+  }
 }
