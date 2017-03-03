@@ -3,22 +3,21 @@ module.exports = function race(...middlewares) {
 
   return function compositeMiddleware(req, res, next) {
     var remaining = middlewares.length;
+    var done = false;
+
+    function finish(err) {
+      done = true;
+      next(err);
+    }
 
     middlewares.forEach(function(middleware) {
-      var done = false;
 
       setImmediate(function() {
-        var once = true;
-
         middleware(req, res, function(err) {
           if(done) return;
-          done = true;
-
-          if(!err) return next();
-
+          if(!err) return finish();
           remaining -= 1;
-          // every middleware function ended in error
-          if (remaining === 0) return next(err);
+          if (remaining === 0) return finish(err);
         });
       });
     });
